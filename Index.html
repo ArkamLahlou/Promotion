@@ -1,0 +1,167 @@
+---
+layout: default
+---
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔑 القائمة الحصرية | أسعار الموردين السريين من AliExpress</title>
+    <style>
+        /* الأنماط لإنشاء إحساس الخصوصية والإثارة */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            text-align: right;
+            direction: rtl;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        /* تصميم العنوان السري */
+        .header {
+            background-color: #cc0000; /* أحمر الإثارة */
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0 0 10px 0;
+            font-size: 2.5em;
+        }
+        .header p {
+            font-size: 1.2em;
+            font-weight: 300;
+        }
+        /* تصميم بطاقة المنتج */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        .product-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+        .product-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        .product-details {
+            padding: 15px;
+        }
+        .product-details h3 {
+            font-size: 1.4em;
+            margin-top: 0;
+            min-height: 70px; /* لضمان تناسق ارتفاع العناوين */
+        }
+        .price-old {
+            color: #aaa;
+            text-decoration: line-through;
+            font-size: 1em;
+            margin-left: 10px;
+        }
+        .price-new {
+            color: #ff0000;
+            font-size: 1.8em;
+            font-weight: bold;
+        }
+        .buy-button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff; /* زر جذاب */
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 6px;
+            margin-top: 15px;
+            font-size: 1.2em;
+            transition: background-color 0.3s;
+            font-weight: bold;
+        }
+        .buy-button:hover {
+            background-color: #0056b3;
+        }
+        .elite-tag {
+            background-color: #ffc107;
+            color: #333;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        .no-deals {
+            text-align: center;
+            font-size: 1.5em;
+            color: #ff0000;
+            padding: 50px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>🔑 قاعة العروض السرية (لا تخبر أحداً)</h1>
+        <p>هذه الأسعار يتم تحديثها آلياً من مخازن الموردين. ميزتك هي أنك تحصل عليها أولاً.</p>
+    </div>
+
+    <div class="product-grid">
+
+        {% assign deals = site.data.deals %}
+        
+        {% if deals.size > 0 %}
+            {% for product in deals %}
+            <div class="product-card">
+                <img src="{{ product.image_url }}" alt="{{ product.title_raw }}" class="product-img">
+                
+                <div class="product-details">
+                    <span class="elite-tag">عرض خاص - تخفيض {{ 'now' | date: "%Y" }}</span>
+                    <h3>{{ product.title_raw | strip_html | truncate: 75 }}</h3>
+                    
+                    <div>
+                        <span class="price-new">{{ product.price_scraped }}</span>
+                        <span class="price-old">كان: 49.99 $</span> 
+                    </div>
+                    
+                    <a href="{{ product.exclusive_link }}" target="_blank" class="buy-button">احصل على السعر السري الآن</a>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="no-deals">
+                عفواً، جاري تحديث قائمة العروض السرية... يرجى المحاولة مرة أخرى قريباً!
+            </div>
+        {% endif %}
+        
+        </div>
+
+    <p style="text-align: center; margin-top: 50px; font-size: 0.85em; color: #777;">
+        *جميع الأسعار والتخفيضات هي تحديثات مباشرة من الموردين عبر AliExpress. نحن نوفر لك وصولاً حصرياً.
+    </p>
+
+</div>
+
+</body>
+  </html>
